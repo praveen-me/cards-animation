@@ -20,19 +20,26 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.praveen.getdocument"
+      "package": "com.praveen.getdocument",
+      "enableProguardInReleaseBuilds": true
     },
     "web": {
       "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    "plugins": [
-      "expo-router",
-      "expo-font"
-    ],
+    "plugins": ["expo-router", "expo-font"],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "46005902-120f-4761-b9fd-30c57f11c50c"
+      }
+    },
+    "owner": "praveen-me"
   }
 }
