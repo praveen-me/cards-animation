@@ -5,6 +5,7 @@ import FlightTakeOff from "@/components/svg/FlightTakeOff";
 import HealthAndSafety from "@/components/svg/HealthAndSafety";
 import HistoryEducationIcon from "@/components/svg/HistoryEducationIcon";
 import LightBulb from "@/components/svg/LightBulb";
+import PlusIcon from "@/components/svg/PlusIcon";
 import Visa from "@/components/svg/Visa";
 import WaterDrop from "@/components/svg/WaterDrop";
 import WifiIcon from "@/components/svg/WifiIcon";
@@ -21,6 +22,7 @@ const icons = {
   chipIcon: ChipIcon,
   wifi: WifiIcon,
   visa: Visa,
+  plus: PlusIcon,
 };
 
 export type IconType = keyof typeof icons;

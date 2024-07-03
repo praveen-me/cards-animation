@@ -18,8 +18,6 @@ export default function RootLayout() {
     SpaceGroteskRegular: require("../assets/fonts/SpaceGrotesk-Regular.ttf"),
   });
 
-  console.log({ loaded });
-
   useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync();
