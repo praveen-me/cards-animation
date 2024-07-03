@@ -23,6 +23,8 @@ const icons = {
   visa: Visa,
 };
 
+export type IconType = keyof typeof icons;
+
 interface ISvgIconProps {
   icon: keyof typeof icons;
   size?: number;

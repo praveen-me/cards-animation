@@ -3,11 +3,9 @@ import {
   StyleSheet,
   useWindowDimensions,
   ImageBackground,
-  ImageRequireSource,
   ImageSourcePropType,
 } from "react-native";
-import React, { useRef, useState } from "react";
-import { theme } from "@/constants/theme";
+
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -17,57 +15,18 @@ import Animated, {
   interpolate,
 } from "react-native-reanimated";
 import { BlurView } from "expo-blur";
-import {
-  Gesture,
-  GestureDetector,
-  GestureHandlerRootView,
-} from "react-native-gesture-handler";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 
 import AppText from "@/components/AppText";
 import { getCards, scaleSizeFromBase } from "@/helpers";
-
+import { theme } from "@/constants/theme";
 import SvgIcon from "@/components/SvgIcon";
 
-export default function RenderCards() {
-  const items = useRef([0, 1, 2, 3, 4, 5]);
-  const animatedValue = useSharedValue(0);
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const MAX_ITEMS = 4;
-
-  const cycleCards = () => {
-    setCurrentIndex(currentIndex + 1);
-  };
-
-  return (
-    <GestureHandlerRootView>
-      <View style={[styles.container]}>
-        {getCards().map(
-          (item, index) =>
-            !(index > currentIndex + MAX_ITEMS || index < currentIndex) && (
-              <Card
-                key={item.cardNumber}
-                item={item}
-                itemsLength={items.current.length}
-                index={index}
-                cycleCards={cycleCards}
-                currentIndex={currentIndex}
-                animatedValue={animatedValue}
-                maxVisibleItem={MAX_ITEMS}
-              />
-            )
-        )}
-      </View>
-    </GestureHandlerRootView>
-  );
-}
-
 interface ICardProps {
-  color: string;
   item: ReturnType<typeof getCards>[0];
   itemsLength: number;
   index: number;
-  cycleCards: () => void;
+  cycleCards: (card: ReturnType<typeof getCards>[0]) => void;
   currentIndex: number;
   animatedValue: SharedValue<number>;
   maxVisibleItem: number;
@@ -109,7 +68,7 @@ const Card = (props: ICardProps) => {
       if (currentIndex === index) {
         if (Math.abs(translationX) > 100 || Math.abs(velocityX) > 1000) {
           translateX.value = withTiming(width * direction.value, {}, () => {
-            runOnJS(props.cycleCards)();
+            runOnJS(props.cycleCards)(item);
           });
 
           animatedValue.value = withTiming(currentIndex + 1);
@@ -135,11 +94,11 @@ const Card = (props: ICardProps) => {
       [-translateSize, 0]
     );
 
-    const scale = interpolate(
-      animatedValue.value,
-      [index - 1, index],
-      [0.9, 1]
-    );
+    // const scale = interpolate(
+    //   animatedValue.value,
+    //   [index - 1, index],
+    //   [0.9, 1]
+    // );
 
     const opacity = interpolate(
       animatedValue.value + maxVisibleItem,
@@ -245,12 +204,6 @@ const Card = (props: ICardProps) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: theme.metrics.basePadding,
-    flex: 1,
-    justifyContent: "center",
-    marginTop: 48,
-  },
   card: {
     width: "100%",
     position: "absolute",
@@ -292,3 +245,5 @@ const styles = StyleSheet.create({
     color: theme.colors.white,
   },
 });
+
+export default Card;

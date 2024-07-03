@@ -1,6 +1,6 @@
 import { View, StyleSheet, TouchableOpacity, Pressable } from "react-native";
 import React, { useEffect, useState, memo } from "react";
-import SvgIcon from "@/components/SvgIcon";
+import SvgIcon, { IconType } from "@/components/SvgIcon";
 import { scaleSizeFromBase } from "@/helpers";
 import Animated, {
   useAnimatedStyle,
@@ -16,10 +16,10 @@ const icons = [
   "healthAndSafety",
   "historyEducation",
   "cardMemberShip",
-];
+] as IconType[];
 
 const RenderIcons = () => {
-  const [activeIcon, setActiveIcon] = useState(icons[0]);
+  const [activeIcon, setActiveIcon] = useState<IconType>(icons[0]);
 
   return (
     <View style={styles.container}>
@@ -36,13 +36,10 @@ const RenderIcons = () => {
 };
 
 interface IIconProps {
-  icon: string;
-  setActiveIcon: (icon: string) => void;
+  icon: IconType;
+  setActiveIcon: (icon: IconType) => void;
   isActive: boolean;
 }
-
-const AnimatedTouchableOpacity =
-  Animated.createAnimatedComponent(TouchableOpacity);
 
 const Icon = memo((props: IIconProps) => {
   const { setActiveIcon, icon, isActive } = props;
@@ -88,7 +85,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: scaleSizeFromBase(30),
     alignItems: "center",
     justifyContent: "space-between",
-    marginVertical: scaleSizeFromBase(48),
+    marginVertical: scaleSizeFromBase(40),
   },
   iconContainer: {
     margin: 10,

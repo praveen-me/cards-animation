@@ -41,16 +41,17 @@ export default function Header() {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: theme.metrics.basePadding,
+    paddingTop: scaleSizeFromBase(theme.metrics.basePadding),
   },
   background: {
-    height: 71,
-    width: 71,
-    borderRadius: 71 / 2,
+    height: scaleSizeFromBase(71),
+    width: scaleSizeFromBase(71),
+    borderRadius: scaleSizeFromBase(71 / 2),
     overflow: "hidden",
   },
   btn: {
     backgroundColor: theme.colors.btnBg,
-    padding: theme.metrics.medium,
+    padding: scaleSizeFromBase(theme.metrics.medium),
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
@@ -59,13 +60,13 @@ const styles = StyleSheet.create({
   btnText: {
     color: theme.colors.white,
     fontSize: scaleSizeFromBase(theme.fontSizes.base),
-    marginLeft: theme.metrics.small,
+    marginLeft: scaleSizeFromBase(theme.metrics.small),
   },
   head: {
     fontSize: scaleSizeFromBase(37),
     fontWeight: "bold",
     color: theme.colors.primaryText,
-    marginBottom: theme.metrics.baseMargin,
+    marginBottom: scaleSizeFromBase(theme.metrics.baseMargin),
   },
   subHead: {
     fontSize: scaleSizeFromBase(21),
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
     color: theme.colors.primaryText,
   },
   infoContainer: {
-    marginTop: theme.metrics.baseMargin,
-    marginBottom: 54,
+    marginTop: scaleSizeFromBase(theme.metrics.baseMargin),
+    marginBottom: scaleSizeFromBase(54),
   },
 });
