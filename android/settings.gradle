@@ -1,4 +1,4 @@
-rootProject.name = 'GetDocument'
+rootProject.name = 'Get Document'
 
 dependencyResolutionManagement {
   versionCatalogs {

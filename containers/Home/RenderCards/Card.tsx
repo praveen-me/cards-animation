@@ -67,9 +67,13 @@ const Card = (props: ICardProps) => {
     .onEnd(({ translationX, velocityX }) => {
       if (currentIndex === index) {
         if (Math.abs(translationX) > 100 || Math.abs(velocityX) > 1000) {
-          translateX.value = withTiming(width * direction.value, {}, () => {
-            runOnJS(props.cycleCards)(item);
-          });
+          translateX.value = withTiming(
+            (20 + width) * direction.value,
+            {},
+            () => {
+              runOnJS(props.cycleCards)(item);
+            }
+          );
 
           animatedValue.value = withTiming(currentIndex + 1);
         } else {
@@ -94,12 +98,6 @@ const Card = (props: ICardProps) => {
       [-translateSize, 0]
     );
 
-    // const scale = interpolate(
-    //   animatedValue.value,
-    //   [index - 1, index],
-    //   [0.9, 1]
-    // );
-
     const opacity = interpolate(
       animatedValue.value + maxVisibleItem,
       [index, index + 1],
@@ -110,7 +108,6 @@ const Card = (props: ICardProps) => {
       transform: [
         { translateX: translateX.value },
         { translateY: translateY },
-        // { scale: scale },
         {
           rotateZ:
             currentIndex === index ? `${direction.value * rotateZ}deg` : "0deg",
